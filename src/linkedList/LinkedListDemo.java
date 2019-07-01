@@ -1,7 +1,5 @@
 package linkedList;
 
-import linkedList.LinkedList.Node;
-
 class LinkedList {
 	Node head;
 
@@ -53,7 +51,7 @@ class LinkedList {
 		Node newNode = new Node(data);
 		newNode.next = prev.next;
 		prev.next = newNode;
-		System.out.println("successfully added node after" + ":" + prev.data);
+		//System.out.println("successfully added node after" + ":" + prev.data);
 	}
 
 	// adding node in from at head
@@ -65,18 +63,29 @@ class LinkedList {
 		Node newNode = new Node(data);
 		newNode.next = head;
 		head = newNode;
-		System.out.println("added at head");
+		//System.out.println("added at head");
 	}
-	//deleting the element by key for first occurneces
+	//deleting the element by key for first occurrences
 	public void deleteByKey(int data) {
-		Node n=head;
+		Node n =head , prev_node=null;
+		//if head contains the key value and we need to delete the head
 		if(n!=null && n.data==data) {
 			n=n.next;
 			
-		}
+		}//1->2->3->4->5->6
+		//this while is just for iterating the node and checking the key position
+		//the while loop will break by two reason 
+		//1. either if next node is null 
+		//2. or key is found
+		//if node is null then the app will terminate else prev_node is changed to point to next
 		while(n!=null && n.data!=data) {
-			////////////////////
+		prev_node=n;
+		n=n.next;
 		}
+		// if key is not found in the list
+	if(n==null) return;
+	//if key is found in the list
+	prev_node.next=n.next;
 	}
 	
 }
@@ -97,12 +106,18 @@ public class LinkedListDemo {
 		// n4.next=n5;
 		for (int i = 1; i < 6; i++) {
 			ls.addNodeEnd(i);
-			System.out.println("added" + " : " + i);
-			ls.printList();
+			//System.out.println("added" + " : " + i);
+			//ls.printList();
 		}
 		ls.addNodeMid(ls.head.next.next, 9);
-		System.out.println("Final list display: ");
+		System.out.println("after adding  by given position a value : 9 ");
+		ls.printList();
+		//System.out.println("Final list display: ");
 		ls.addNodeHead(12);
+		System.out.println("after adding node to head : 12");
+		ls.printList();
+		ls.deleteByKey(3);
+		System.out.println("after deletion by key : 3");
 		ls.printList();
 	}
 
