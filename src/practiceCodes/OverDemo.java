@@ -1,4 +1,4 @@
-package myCodes.testcode;
+
 
 class A {
 	void show() {
